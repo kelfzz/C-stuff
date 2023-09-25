@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <math.h>
+
+// Function to calculate factorial
+double factorial(double n) {
+    if (n <= 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+int main() {
+    char operation;
+    double num1, num2, result;
+
+    while (1) {
+        printf("Enter an operation (+, -, *, /, sqrt, ^, sin, cos, tan, log, factorial) or 'q' to quit: ");
+        scanf(" %c", &operation);
+
+        if (operation == 'q') {
+            break; // Exit the program if 'q' is entered
+        }
+
+        printf("Enter a number (or two numbers for binary operations): ");
+        scanf("%lf", &num1);
+
+        switch (operation) {
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+                printf("Enter another number: ");
+                scanf("%lf", &num2);
+                break;
+            case 'sqrt':
+            case 'sin':
+            case 'cos':
+            case 'tan':
+            case 'log':
+            case 'factorial':
+                num2 = 0; // Initialize num2 to 0 for unary operations
+                break;
+            default:
+                printf("Invalid operation.\n");
+                continue; // Skip further processing for this input
+        }
+
+        switch (operation) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 == 0) {
+                    printf("Error: Division by zero!\n");
+                    continue; // Skip further processing for this input
+                }
+                result = num1 / num2;
+                break;
+            case 'sqrt':
+                if (num1 < 0) {
+                    printf("Error: Square root of a negative number!\n");
+                    continue;
+                }
+                result = sqrt(num1);
+                break;
+            case '^':
+                result = pow(num1, num2);
+                break;
+            case 'sin':
+                result = sin(num1);
+                break;
+            case 'cos':
+                result = cos(num1);
+                break;
+            case 'tan':
+                result = tan(num1);
+                break;
+            case 'log':
+                if (num1 <= 0) {
+                    printf("Error: Logarithm of a non-positive number!\n");
+                    continue;
+                }
+                result = log(num1);
+                break;
+            case 'factorial':
+                if (num1 < 0) {
+                    printf("Error: Factorial of a negative number!\n");
+                    continue;
+                }
+                result = factorial(num1);
+                break;
+            default:
+                // This should not be reached due to previous error check
+                break;
+        }
+
+        printf("Result: %lf\n", result);
+    }
+
+    return 0;
+}
