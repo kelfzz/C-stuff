@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    char operation;
+    double num1, num2, result;
+
+    while (1) {
+        printf("Enter an operation (+, -, *, /, sqrt, ^) or 'q' to quit: ");
+        scanf(" %c", &operation);
+
+        if (operation == 'q') {
+            break; // Exit the program if 'q' is entered
+        }
+
+        printf("Enter two numbers: ");
+        scanf("%lf %lf", &num1, &num2);
+
+        switch (operation) {
+            case '+':
+                result = num1 + num2;
+                break;
+            case '-':
+                result = num1 - num2;
+                break;
+            case '*':
+                result = num1 * num2;
+                break;
+            case '/':
+                if (num2 == 0) {
+                    printf("Error: Division by zero!\n");
+                    continue; // Skip further processing for this input
+                }
+                result = num1 / num2;
+                break;
+            case 'sqrt':
+                if (num1 < 0) {
+                    printf("Error: Square root of a negative number!\n");
+                    continue;
+                }
+                result = sqrt(num1);
+                break;
+            case '^':
+                result = pow(num1, num2);
+                break;
+            default:
+                printf("Invalid operation.\n");
+                continue; // Skip further processing for this input
+        }
+
+        printf("Result: %lf\n", result);
+    }
+
+    return 0;
+}
